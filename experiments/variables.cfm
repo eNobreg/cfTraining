@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="english">
+<html lang="html">
 <head>
 <meta charset="utf-8" />
 <title>Untitled Document</title>
