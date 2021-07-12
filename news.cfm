@@ -40,11 +40,17 @@
       <cfquery datasource="hdStreet" name="rsAllNews">
         SELECT FLD_NEWSTITLE, FLD_NEWSCREATIONDATE, FLD_NEWSID
         FROM TBL_NEWS
+        ORDER BY FLD_NEWSCREATIONDATE DESC
       </cfquery>
-       <h1> News</h1>
-      <table>
-      <!---Output  news in a table--->
-
+       <h1>News</h1>
+      <table> <!---Output  news in a table--->
+        <cfoutput query="rsAllNews">
+          <tr>
+            <td>#dateFormat(FLD_NEWSCREATIONDATE, 'mm dd yyyy')#</td>
+            <td>#FLD_NEWSTITLE#</td>
+            <td><a href="news.cfm">Read more</a></td>
+          </tr>
+        </cfoutput>
       </table>
     </div>
     <div id="calendarSideBar">
