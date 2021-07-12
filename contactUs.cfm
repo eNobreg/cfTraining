@@ -1,4 +1,10 @@
 <!---Get page content for fld_pageID = 6--->
+<cfquery datasource="hdStreet" name="rsPage">
+  SELECT FLD_PAGETITLE, FLD_PAGECONTENT
+  FROM TBL_PAGES
+  WHERE FLD_PAGEID = 6 AND FLD_PAGEISACTIVE = 1
+</cfquery>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +20,8 @@
   <div id="header"> <a href="#"><img src="/cfTraining/images/logo.png" alt="logo" name="logo" width="188" height="181" id="logo" /></a>
     <p id="mainTitle"><img src="/cfTraining/images/mainTitle.png" width="398" height="158" alt="HD Street Concert Band" /><span>HD Street Concert Band</span></p>
 <ul>
-       	<li><a href="siteMap.html">Site Map</a></li>
-        <li><a href="contactUs.html">Contact us</a></li>
+       	<li><a href="siteMap.cfm">Site Map</a></li>
+        <li><a href="contactUs.cfm">Contact us</a></li>
     </ul>
   </div>
   <div id="menu">
@@ -24,30 +30,21 @@
       <li><a href="agenda.html">Agenda</a></li>
       <li><a href="#">The Band</a>
         <ul>
-          <li><a href="director.html">The director</a></li>
-          <li><a href="history.html">The band History</a></li>
+          <li><a href="director.cfm">The director</a></li>
+          <li><a href="history.cfm">The band History</a></li>
         </ul>
       </li>
-      <li><a href="wePlayForYou.html">We play for You</a></li>
-      <li><a href="comePlayWithUs.html">Come play with us</a></li>
-      <li><a href="news.html">News</a></li>
+      <li><a href="wePlayForYou.cfm">We play for You</a></li>
+      <li><a href="comePlayWithUs.cfm">Come play with us</a></li>
+      <li><a href="news.cfm">News</a></li>
     </ul>
   </div>
   <div id="pageBody">
   <!---Erase from here--->
-<h1>Contact us
-</h1>
-    <h2>Our mailing address</h2>
-<p>Hd Street band<br />
-  c/o Mr Tony Sapere<br />
-  11555 Southfork Ave<br />
-  70816 Baton Rouge LA
-  <br />
-</p>
-<h2>Contact us by e-mail</h2>
-<p><a href="mailto:info@hdstreetband.com">info@hdstreetband.com</a></p>
-<h2>contact us by phone</h2>
-<p>(225) - 295-1234</p>
+    <cfoutput>
+      <h1>#rsPage.FLD_PAGETITLE#</h1>
+      #rsPage.FLD_PAGECONTENT#
+    </cfoutput>
 <!---To here--->
 </div>
   <div id="footer">
