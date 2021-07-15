@@ -49,7 +49,7 @@
             <tr>
               <th>#dateformat(FLD_EVENTDATETIME, "mm dd yyyy")#</th>
               <td>#FLD_EVENTNAME# - #FLD_EVENTLOCATION# (#FLD_EVENTVENUE#)</td>
-              <td><a href="agenda.cfm">Read More</a></td>
+              <td><a href="agenda.cfm?eventID=#FLD_EVENTID#">Read More</a></td>
             </tr>
           </cfoutput>
         </table>
@@ -66,7 +66,7 @@
             <h2>#rsCurrentEvents.FLD_EVENTNAME# - #rsCurrentEvents.FLD_EVENTLOCATION#</h2>
           </div>
           <p>#rsCurrentEvents.FLD_EVENTVENUE#</p>
-          <p class="alignRight"><a href="events/20110719.html">Read More</a></p>
+          <p class="alignRight"><a href="agenda.cfm?eventID=#rsCurrentEvents.FLD_EVENTID#">Read More</a></p>
         </cfoutput>
       </cfif>
   </div>
