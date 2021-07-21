@@ -1,5 +1,57 @@
 <!---Form processing begins here--->
 
+<cfif structKeyExists(form, 'fld_editUserSubmit')>
+	<!--- Server side form validation --->
+	<cfset aErrorMessages = arrayNew(1) />
+	<cfset variables.formSubmitComplete = false />
+
+	<!--- Validate first name --->
+	<cfif form.fld_userFirstName EQ ''>
+		<cfset arrayAppend(aErrorMessages,'Please provide a first name') />
+	</cfif>
+
+	<!--- Validate last name --->
+	<cfif form.fld_userLastName EQ ''>
+		<cfset arrayAppend(aErrorMessages,'Please provide a last name') />
+	</cfif>
+
+	<!--- Validate email address --->
+	<cfif form.fld_userEmail EQ '' OR NOT isValid('email', form.fld_userEmail)>
+		<cfset arrayAppend(aErrorMessages,'Please provide a valid email address') />
+	</cfif>
+
+	<!--- Validate password --->
+	<cfif form.fld_userPassword EQ ''>
+		<cfset arrayAppend(aErrorMessages,'Please provide a password') />
+	</cfif>
+
+	<!--- Validate confirm password --->
+	<cfif form.fld_userPasswordConfirm EQ ''>
+		<cfset arrayAppend(aErrorMessages,'Please confirm your password') />
+	</cfif>
+
+	<!---validate password and password confirmation Match --->
+	<cfif form.fld_userPassword NEQ form.fld_userPasswordConfirm >
+		<cfset arrayAppend(aErrorMessages, 'The password and the password confirmation do not match') />
+	</cfif>
+
+	<!--- If aErrorMessages is empty --->
+	<cfif arrayIsEmpty(aErrorMessages)>
+		<cfquery datasource="hdStreet">
+			UPDATE TBL_USERS
+			SET FLD_USERFIRSTNAME = '#form.fld_userFirstName#',
+			FLD_USERLASTNAME = '#form.fld_userLastName#',
+			FLD_USEREMAIL = '#form.fld_userEmail#',
+			FLD_USERPASSWORD = '#form.fld_userPassword#',
+			FLD_USERINSTRUMENT = #form.fld_userInstrument#,
+			FLD_USERCOMMENT = '#form.fld_userComment#'
+			WHERE FLD_USERID = #form.fld_userID#
+		</cfquery>
+		<cfset variables.formSubmitComplete = true />
+	</cfif>
+</cfif>
+
+
 <!---Form processing ends here--->
 
 <!---Get user to update--->
@@ -55,6 +107,14 @@
 			<fieldset>
 				<legend>Your profile</legend>
 				<!---Output error messages if any--->
+
+				<cfif isDefined('aErrorMessages') AND NOT arrayIsEmpty(aErrorMessages)>
+					<cfoutput>
+						<cfloop array="#aErrorMessages#" index="message">
+							<p class="errorMessage">#message#</p>
+						</cfloop>
+					</cfoutput>
+				</cfif>
 				
 				<!---Output feedback message if form has been successfully submitted--->
 				
