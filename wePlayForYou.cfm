@@ -26,7 +26,7 @@
   </div>
   <div id="menu">
     <ul>
-      <li><a href="index.html">Home</a></li>
+      <li><a href="index.cfm">Home</a></li>
       <li><a href="agenda.cfm">Agenda</a></li>
       <li><a href="#">The Band</a>
         <ul>

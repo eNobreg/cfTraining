@@ -17,10 +17,11 @@
         <li><a href="contactUs.cfm">Contact us</a></li>
     </ul>
     <!---Include login form here--->
+    <cfinclude template="includes/loginForm.cfm" />
   </div>
   <div id="menu">
     <ul>
-      <li><a href="index.html">Home</a></li>
+      <li><a href="index.cfm">Home</a></li>
       <li><a href="agenda.cfm">Agenda</a></li>
       <li><a href="#">The Band</a>
         <ul>

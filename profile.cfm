@@ -88,7 +88,7 @@
   </div>
   <div id="menu">
     <ul>
-      <li><a href="index.html">Home</a></li>
+      <li><a href="index.cfm">Home</a></li>
       <li><a href="agenda.cfm">Agenda</a></li>
       <li><a href="#">The Band</a>
         <ul>
@@ -117,7 +117,9 @@
 				</cfif>
 				
 				<!---Output feedback message if form has been successfully submitted--->
-				
+				<cfif structKeyExists(variables, 'formSubmitComplete') AND variables.formSubmitComplete>
+					<p class="feedback">Your profile has been updated</p>
+				</cfif>
 				<dl>
 					<!---First name text field--->
 					<dt><label for="fld_userFirstName">First Name</label></dt>
