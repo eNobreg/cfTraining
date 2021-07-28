@@ -1,4 +1,4 @@
-<cfinclude template="includes/header.cfm" />
+<cfmodule template="customTags/front.cfm" tilte="HD street band - Agenda">
   <div id="pageBody">
     <div id="calendarContent">
       <cfif isDefined("url.eventID")>
@@ -64,4 +64,4 @@
       </cfif>
   </div>
   </div>
-  <cfinclude template="includes/footer.cfm" />
+</cfmodule>
