@@ -1,9 +1,6 @@
 <!---Get page content--->
-<cfquery datasource="hdStreet" name="rsPage">
-    SELECT FLD_PAGETITLE, FLD_PAGECONTENT
-    FROM TBL_PAGES
-    WHERE FLD_PAGEID = 1 AND FLD_PAGEISACTIVE = 1
-</cfquery>
+<cfinclude template="includes/myFunctions.cfm" />
+<cfset rsPage = getPageContent(1) />
 
 <cfmodule template="customTags/front.cfm" title="HD street band - Director">
   <div id="pageBody">
