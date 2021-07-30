@@ -1,31 +1,20 @@
 <!---Get news years--->
-<cfquery datasource="hdStreet" name="rsNewsYears">
-  SELECT YEAR(FLD_NEWSCREATIONDATE) AS fld_newsYear
-  FROM TBL_NEWS
-  ORDER BY FLD_NEWSCREATIONDATE DESC
-</cfquery>
+
 
 <cfmodule template="customTags/front.cfm" title="HD street band - News">
   <div id="pageBody">
       <div id="calendarContent">
         <cfif isDefined("url.newsID")>
-            <cfquery datasource="hdStreet" name="rsSingleNews">
-                SELECT TBL_NEWS.FLD_NEWSCONTENT, TBL_NEWS.FLD_NEWSTITLE, TBL_NEWS.FLD_NEWSCREATIONDATE, TBL_USERS.FLD_USERFIRSTNAME, TBL_USERS.FLD_USERLASTNAME
-                FROM TBL_NEWS INNER JOIN TBL_USERS ON TBL_NEWS.FLD_NEWSAUTHOR = TBL_USERS.FLD_USERID
-                WHERE FLD_NEWSID = #url.newsID#
-            </cfquery>
+            <!--- Output a single news --->
+
             <cfoutput>
                 <h1>#rsSingleNews.FLD_NEWSTITLE#</h1>
                 <p class="metadata">Published on #dateFormat(rsSingleNews.FLD_NEWSCREATIONDATE, "mm dd yyy")# by #rsSingleNews.FLD_USERFIRSTNAME# #rsSingleNews.FLD_USERLASTNAME#</p>
                 #rsSingleNews.FLD_NEWSCONTENT#
             </cfoutput>
         <cfelseif isDefined('url.year')>
-          <cfquery datasource="hdStreet" name="rsNewsOfYear">
-            SELECT FLD_NEWSTITLE, FLD_NEWSCREATIONDATE, FLD_NEWSID
-            FROM TBL_NEWS
-            WHERE year(FLD_NEWSCREATIONDATE) = #url.year#
-            ORDER BY FLD_NEWSCREATIONDATE DESC
-          </cfquery>
+            <!--- Gets the news of a year --->
+
                 <h1>All the news for <cfoutput>#url.year#</cfoutput></h1>
             <table> <!---Output  news in a table--->
             <cfoutput query="rsNewsOfYear">
@@ -39,11 +28,8 @@
         <cfelse>
         <!---Output all news if no url scope newsID not present in URL--->
         <!---Get all news--->
-          <cfquery datasource="hdStreet" name="rsAllNews">
-            SELECT FLD_NEWSTITLE, FLD_NEWSCREATIONDATE, FLD_NEWSID
-            FROM TBL_NEWS
-            ORDER BY FLD_NEWSCREATIONDATE DESC
-          </cfquery>
+
+
            <h1>News</h1>
           <table> <!---Output  news in a table--->
             <cfoutput query="rsAllNews">

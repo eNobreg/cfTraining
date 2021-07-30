@@ -3,24 +3,15 @@
     <div id="calendarContent">
       <cfif isDefined("url.eventID")>
         <!--- If there is an event ID go here and output single agenda---->
-        <cfquery datasource="hdStreet" name="rsSingleEvent">
-            SELECT FLD_EVENTID, FLD_EVENTNAME, FLD_EVENTDATETIME,
-            FLD_EVENTLOCATION, FLD_EVENTVENUE, FLD_EVENTDESCRIPTION
-            FROM TBL_EVENTS
-            WHERE FLD_EVENTID = #url.eventID#
-        </cfquery>
+
         <cfoutput>
             <h1>#rsSingleEvent.fld_eventName#</h1>
             #rsSingleEvent.fld_eventDescription#
         </cfoutput>
         <a href="agenda.cfm">Go back to the agenda</a>
       <cfelse>
-        <cfquery datasource="hdStreet" name="rsCurrentEvents">
-          SELECT FLD_EVENTID, FLD_EVENTNAME, FLD_EVENTDATETIME, FLD_EVENTLOCATION, FLD_EVENTVENUE
-          FROM TBL_EVENTS
-          WHERE FLD_EVENTDATETIME >= #now()#
-          ORDER BY FLD_EVENTDATETIME ASC
-        </cfquery>
+        <!--- Output the upcoming event table if url.eventID is not defined --->
+
         <h1> Agenda</h1>
         <cfif rsCurrentEvents.recordCount EQ 0>
           <p>Sorry there are no events to display at this time</p>
