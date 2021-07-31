@@ -23,12 +23,7 @@
         <cfset form.fld_userApproved = 0 />
         <cfset form.fld_userIsActive = 0 />
         <!--- Insert into Database --->
-        <cfquery datasource="hdStreet">
-            INSERT INTO  TBL_USERS
-            (FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL, FLD_USERPASSWORD, FLD_USERCOMMENT, FLD_USERAPPROVED, FLD_USERISACTIVE, FLD_USERROLE, FLD_USERINSTRUMENT)
-            VALUES
-            ('#form.fld_userFirstName#', '#form.fld_userLastName#', '#form.fld_userEmail#', '#form.fld_userPassword#', '#form.fld_userComment#', #form.fld_userapproved#, #form.fld_userIsActive#, #form.fld_userRole#, #form.fld_userInstrument#)
-        </cfquery>
+
         <cfset userIsInserted = true />
     </cfif>
 </cfif>
