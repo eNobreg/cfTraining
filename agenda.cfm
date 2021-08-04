@@ -1,9 +1,11 @@
+<cfset eventService = createObject("component", "components.eventsService") />
+
 <cfmodule template="customTags/front.cfm" tilte="HD street band - Agenda">
   <div id="pageBody">
     <div id="calendarContent">
       <cfif isDefined("url.eventID")>
         <!--- If there is an event ID go here and output single agenda---->
-
+        <cfset rsSingleEvent = eventService.getEventById(url.eventID) />
         <cfoutput>
             <h1>#rsSingleEvent.fld_eventName#</h1>
             #rsSingleEvent.fld_eventDescription#
@@ -11,7 +13,7 @@
         <a href="agenda.cfm">Go back to the agenda</a>
       <cfelse>
         <!--- Output the upcoming event table if url.eventID is not defined --->
-
+        <cfset rsCurrentEvents = eventService.getCurrentEvents() />
         <h1> Agenda</h1>
         <cfif rsCurrentEvents.recordCount EQ 0>
           <p>Sorry there are no events to display at this time</p>

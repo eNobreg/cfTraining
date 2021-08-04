@@ -1,12 +1,14 @@
+<!--- Create a new instance of the NewsService component --->
+<cfset newsService = createObject("component", "components.newsService") />
 <!---Get news years--->
-
+<cfset rsNewsYears = newsService.getNewsYears() />
 
 <cfmodule template="customTags/front.cfm" title="HD street band - News">
   <div id="pageBody">
       <div id="calendarContent">
         <cfif isDefined("url.newsID")>
             <!--- Output a single news --->
-
+            <cfset rsSingleNews = newsService.getNewsByID(url.newsID) />
             <cfoutput>
                 <h1>#rsSingleNews.FLD_NEWSTITLE#</h1>
                 <p class="metadata">Published on #dateFormat(rsSingleNews.FLD_NEWSCREATIONDATE, "mm dd yyy")# by #rsSingleNews.FLD_USERFIRSTNAME# #rsSingleNews.FLD_USERLASTNAME#</p>
@@ -14,8 +16,8 @@
             </cfoutput>
         <cfelseif isDefined('url.year')>
             <!--- Gets the news of a year --->
-
-                <h1>All the news for <cfoutput>#url.year#</cfoutput></h1>
+            <cfset rsNewsOfYear = newsService.getNewsForYear(url.year) />
+            <h1>All the news for <cfoutput>#url.year#</cfoutput></h1>
             <table> <!---Output  news in a table--->
             <cfoutput query="rsNewsOfYear">
                     <tr>
@@ -28,7 +30,7 @@
         <cfelse>
         <!---Output all news if no url scope newsID not present in URL--->
         <!---Get all news--->
-
+           <cfset rsAllNews = newsService.getLatestNews() />
 
            <h1>News</h1>
           <table> <!---Output  news in a table--->
