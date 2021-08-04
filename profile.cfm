@@ -1,23 +1,26 @@
+<cfset userService = createObject("component", "components.userService") />
 <!---Form processing begins here--->
 
 <cfif structKeyExists(form, 'fld_editUserSubmit')>
 	<!--- Server side form validation --->
-
+	<cfset aErrorMessages = userService.validateUser(form.fld_userFirstName,form.fld_userLastName,
+			form.fld_userEmail,form.fld_userPassword,form.fld_userPasswordConfirm) />
 
 	<!--- If aErrorMessages is empty --->
 	<cfif arrayIsEmpty(aErrorMessages)>
-
-
+		<cfset userService.updateUser(form.fld_userFirstName,form.fld_userLastName,form.fld_userEmail,
+				form.fld_userPassword,form.fld_userRole,form.fld_userInstrument,form.fld_userComment,
+				form.fld_userIsApproved,form.fld_userIsActive,form.fld_userID) />
+		<cfset variables.formSubmitComplete = true />
 	</cfif>
 </cfif>
-
-
 <!---Form processing ends here--->
 
 <!---Get user to update--->
+<cfset rsUserToUpdate = userService.getUserByID(2) />
 
 <!---Get instruments to feed the form's Drop-Down list--->
-
+<cfset rsInstrumentsList = userService.getInstruments() />
 
 <cfmodule template="customTags/front.cfm" title="HD street band - Profile">
 	<div id="pageBody">
@@ -70,6 +73,9 @@
 					</cftextarea></dd>
 				</dl>
 				<cfinput name="fld_userID" value="#rsUserToUpdate.FLD_USERID#" type="hidden" />
+				<cfinput name="fld_userRole" value="1" type="hidden" />
+				<cfinput name="fld_userIsActive" value="1" type="hidden" />
+				<cfinput name="fld_userIsApproved" value="1" type="hidden" />
 				<!---Submit button--->
 				<input type="submit" name="fld_editUserSubmit" id="fld_editUserSubmit" value="Update my profile" />
 			</fieldset>
