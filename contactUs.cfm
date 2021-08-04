@@ -1,9 +1,6 @@
 <!---Get page content for fld_pageID = 6--->
-<cfquery datasource="hdStreet" name="rsPage">
-  SELECT FLD_PAGETITLE, FLD_PAGECONTENT
-  FROM TBL_PAGES
-  WHERE FLD_PAGEID = 6 AND FLD_PAGEISACTIVE = 1
-</cfquery>
+<cfset pageService = createObject("component", 'components.pageService') />
+<cfset rsPage = pageService.getPageContent(6) />
 
 <cfmodule template="customTags/front.cfm" title="HD street band - Contact Us">
   <div id="pageBody">

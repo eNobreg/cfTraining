@@ -29,13 +29,8 @@
 </cfif>
 
 <!---Get page content for fld_pageID = 4--->
-
-
-<cfquery datasource="hdStreet" name="rsPage">
-    SELECT FLD_PAGETITLE, FLD_PAGECONTENT
-    FROM TBL_PAGES
-    WHERE FLD_PAGEID = 4 AND FLD_PAGEISACTIVE = 1
-</cfquery>
+<cfset pageService = createObject("component", 'components.pageService') />
+<cfset rsPage = pageService.getPageContent(4) />
 
 <!--- Get list of instruments for form drop down --->
 <cfquery datasource="hdStreet" name="rsInstrumentsList">
