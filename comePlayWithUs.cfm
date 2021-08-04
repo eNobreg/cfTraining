@@ -1,29 +1,22 @@
+<!--- Creating an instance of the user service component --->
+<cfset userService = createObject("component", "components.userService") />
 
 <!--- Form Processing Script --->
 <cfif structKeyExists(form, 'fld_newUserSubmit')>
+    <!--- Generate missing Data --->
+    <cfset form.fld_userPassword = generateSecretKey("AES") />
+    <cfset form.fld_userRole = 1 />
+    <cfset form.fld_userApproved = 0 />
+    <cfset form.fld_userIsActive = 0 />
     <!--- Start server side form validation --->
-    <cfset aErrorMessages = ArrayNew(1) />
-    <!--- Validate first name --->
-    <cfif form.fld_userFirstName EQ ''>
-        <cfset arrayAppend(aErrorMessages, 'Please enter a valid first name') />
-    </cfif>
-    <!--- Validate last name --->
-    <cfif form.fld_userLastName EQ ''>
-        <cfset arrayAppend(aErrorMessages, 'Please enter a valid last name') />
-    </cfif>
-    <!--- Validate email address --->
-    <cfif form.fld_userEmail EQ '' OR NOT isValid("eMail", form.fld_userEmail)>
-        <cfset arrayAppend(aErrorMessages, 'Please enter a valid email address') />
-    </cfif>
-
+    <cfset aErrorMessages = userService.validateUser(form.fld_userFirstName, form.fld_userLastName, form.fld_userEmail, form.fld_userPassword, form.fld_userPassword) />
     <cfif arrayIsEmpty(aErrorMessages)>
-        <!--- Generate missing Data --->
-        <cfset form.fld_userPassword = generateSecretKey("AES") />
-        <cfset form.fld_userRole = 1 />
-        <cfset form.fld_userApproved = 0 />
-        <cfset form.fld_userIsActive = 0 />
         <!--- Insert into Database --->
-
+        <cfset
+            userService.addUser(form.fld_userFirstName, form.fld_userLastName,
+            form.fld_userEmail, form.fld_userPassword, form.fld_userRole,
+            form.fld_userInstrument,form.fld_userComment,form.fld_userApproved,
+            form.fld_userIsActive) />
         <cfset userIsInserted = true />
     </cfif>
 </cfif>
@@ -33,11 +26,7 @@
 <cfset rsPage = pageService.getPageContent(4) />
 
 <!--- Get list of instruments for form drop down --->
-<cfquery datasource="hdStreet" name="rsInstrumentsList">
-	SELECT FLD_INSTRUMENTID, FLD_INSTRUMENTNAME
-	FROM TBL_INSTRUMENTS
-	ORDER BY FLD_INSTRUMENTNAME ASC
-</cfquery>
+<cfset rsInstrumentsList = userService.getInstruments() />
 
 <cfmodule template="customTags/front.cfm" title="HD street band - Play with us">
 <div id="pageBody">

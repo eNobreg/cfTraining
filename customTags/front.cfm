@@ -9,7 +9,8 @@
         <link href="/cfTraining/styles/hdStreet.css" rel="stylesheet" type="text/css" media="screen" />
         <script type="text/javascript" src="/cfTraining/script/jquery.js"></script>
         <script type="text/javascript" src="/cfTraining/script/menu.js"></script>
-    </head>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
 
     <body>
     <div id="wrapper">

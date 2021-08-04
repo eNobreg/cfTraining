@@ -38,7 +38,7 @@
             INSERT INTO  TBL_USERS
             (FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL, FLD_USERPASSWORD, FLD_USERCOMMENT, FLD_USERAPPROVED, FLD_USERISACTIVE, FLD_USERROLE, FLD_USERINSTRUMENT)
             VALUES
-            ('#arguments.userFirstName#', '#arguments.userLastName#', '#arguments.userEmail#', '#arguments.userPassword#', '#arguments.userComment#', #arguments.userapproved#, #arguments.userIsActive#, #arguments.userRole#, #arguments.userInstrument#)
+            ('#arguments.userFirstName#', '#arguments.userLastName#', '#arguments.userEmail#', '#arguments.userPassword#', '#arguments.userComment#', #arguments.userIsApproved#, #arguments.userIsActive#, #arguments.userRole#, #arguments.userInstrument#)
         </cfquery>
 
     </cffunction>
@@ -49,7 +49,7 @@
         <cfargument name="userLastName" type="string" required="true" />
         <cfargument name="userEmail" type="string" required="true" />
         <cfargument name="userPassword" type="string" required="true" />
-        <cfargument name="userPasswordConfirm" type="numeric" required="true" />
+        <cfargument name="userPasswordConfirm" type="string" required="true" />
 
         <cfset var aErrorMessages = arrayNew(1) />
 
