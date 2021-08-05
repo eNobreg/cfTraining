@@ -8,6 +8,7 @@
             FROM TBL_USERS
             WHERE FLD_USERID = #arguments.userID#
         </cfquery>
+        <cfreturn rsSingleUser />
     </cffunction>
 
 
