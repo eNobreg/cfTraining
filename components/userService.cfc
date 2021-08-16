@@ -3,7 +3,7 @@
     <cffunction name="getUserByID" access="public" returntype="query" output="false">
         <cfargument name="userID" type="numeric" required="true" />
         <cfset var rsSingleUser = '' />
-        <cfquery datasource="hdStreet" name="rsSingleUser">
+        <cfquery  name="rsSingleUser">
             SELECT FLD_USERID, FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL, FLD_USERPASSWORD, FLD_USERROLE, FLD_USERCOMMENT, FLD_USERINSTRUMENT, FLD_USERAPPROVED, FLD_USERROLE
             FROM TBL_USERS
             WHERE FLD_USERID = #arguments.userID#
@@ -15,7 +15,7 @@
     <!--- Get instruments list --->
     <cffunction name="getInstruments" access="public" returntype="query" output="false">
         <cfset var rsInstrumentsList = '' />
-        <cfquery datasource="hdStreet" name="rsInstrumentsList">
+        <cfquery  name="rsInstrumentsList">
             SELECT FLD_INSTRUMENTID, FLD_INSTRUMENTNAME
             FROM TBL_INSTRUMENTS
             ORDER BY FLD_INSTRUMENTNAME ASC
@@ -35,7 +35,7 @@
         <cfargument name="userIsApproved" type="numeric" required="true" />
         <cfargument name="userIsActive" type="numeric" required="true" />
 
-        <cfquery datasource="hdStreet">
+        <cfquery >
             INSERT INTO  TBL_USERS
             (FLD_USERFIRSTNAME, FLD_USERLASTNAME, FLD_USEREMAIL, FLD_USERPASSWORD, FLD_USERCOMMENT, FLD_USERAPPROVED, FLD_USERISACTIVE, FLD_USERROLE, FLD_USERINSTRUMENT)
             VALUES
@@ -100,7 +100,7 @@
         <cfargument name="userIsActive" type="numeric" required="true" />
         <cfargument name="userID" type="numeric" required="true" />
 
-        <cfquery datasource="hdStreet">
+        <cfquery >
             UPDATE TBL_USERS
             SET FLD_USERFIRSTNAME = '#arguments.userFirstName#',
             FLD_USERLASTNAME = '#arguments.userLastName#',

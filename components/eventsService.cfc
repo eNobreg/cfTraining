@@ -3,7 +3,7 @@
     <!--- Get current events method --->
     <cffunction name="getCurrentEvents" access="public" output="false" returntype="query">
         <cfset var rsCurrentEvents = '' />
-        <cfquery datasource="hdStreet" name="rsCurrentEvents">
+        <cfquery  name="rsCurrentEvents">
             SELECT FLD_EVENTID, FLD_EVENTNAME, FLD_EVENTDATETIME, FLD_EVENTLOCATION, FLD_EVENTVENUE
             FROM TBL_EVENTS
             WHERE FLD_EVENTDATETIME >= #now()#
@@ -16,7 +16,7 @@
     <cffunction name="getEventById" access="public" output="false" returntype="query">
         <cfargument name="eventID" type="numeric" required="true" />
         <cfset var rsSingleEvent = '' />
-        <cfquery datasource="hdStreet" name="rsSingleEvent">
+        <cfquery  name="rsSingleEvent">
             SELECT FLD_EVENTID, FLD_EVENTNAME, FLD_EVENTDATETIME,
             FLD_EVENTLOCATION, FLD_EVENTVENUE, FLD_EVENTDESCRIPTION
             FROM TBL_EVENTS

@@ -3,7 +3,7 @@
     <!--- Get Latest News Method --->
     <cffunction name="getLatestNews" access="public" returntype="query">
         <cfset var rsAllNews = '' />
-        <cfquery datasource="hdStreet" name="rsAllNews">
+        <cfquery  name="rsAllNews">
             SELECT FLD_NEWSTITLE, FLD_NEWSCREATIONDATE, FLD_NEWSID
             FROM TBL_NEWS
             ORDER BY FLD_NEWSCREATIONDATE DESC
@@ -14,7 +14,7 @@
     <!--- Get News Years Method --->
     <cffunction name="getNewsYears" access="public" returntype="query">
         <cfset var rsNewsYears = '' />
-        <cfquery datasource="hdStreet" name="rsNewsYears">
+        <cfquery  name="rsNewsYears">
             SELECT YEAR(FLD_NEWSCREATIONDATE) AS fld_newsYear
             FROM TBL_NEWS
             ORDER BY FLD_NEWSCREATIONDATE DESC
@@ -26,7 +26,7 @@
     <cffunction name="getNewsByID" access="public" returntype="query">
         <cfargument name="newsID" type="numeric" required="true" />
         <cfset var rsSingleNews = '' />
-        <cfquery datasource="hdStreet" name="rsSingleNews">
+        <cfquery  name="rsSingleNews">
             SELECT TBL_NEWS.FLD_NEWSCONTENT, TBL_NEWS.FLD_NEWSTITLE, TBL_NEWS.FLD_NEWSCREATIONDATE, TBL_USERS.FLD_USERFIRSTNAME, TBL_USERS.FLD_USERLASTNAME
             FROM TBL_NEWS INNER JOIN TBL_USERS ON TBL_NEWS.FLD_NEWSAUTHOR = TBL_USERS.FLD_USERID
             WHERE FLD_NEWSID = #arguments.newsID#
@@ -38,7 +38,7 @@
     <cffunction name="getNewsForYear" access="public" returntype="query">
         <cfargument name="year" type="numeric" required="true" />
         <cfset var rsNewsOfYear = '' />
-        <cfquery datasource="hdStreet" name="rsNewsOfYear">
+        <cfquery  name="rsNewsOfYear">
             SELECT FLD_NEWSTITLE, FLD_NEWSCREATIONDATE, FLD_NEWSID
             FROM TBL_NEWS
             WHERE year(FLD_NEWSCREATIONDATE) = #arguments.year#
