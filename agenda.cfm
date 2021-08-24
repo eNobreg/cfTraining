@@ -1,6 +1,5 @@
 <cfset eventService = createObject("component", "components.eventsService") />
-
-<cfmodule template="customTags/front.cfm" tilte="HD street band - Agenda">
+<cf_front tilte="HD street band - Agenda">
   <div id="pageBody">
     <div id="calendarContent">
       <cfif isDefined("url.eventID")>
@@ -57,4 +56,4 @@
       </cfif>
   </div>
   </div>
-</cfmodule>
+</cf_front>

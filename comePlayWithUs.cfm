@@ -28,7 +28,7 @@
 <!--- Get list of instruments for form drop down --->
 <cfset rsInstrumentsList = userService.getInstruments() />
 
-<cfmodule template="customTags/front.cfm" title="HD street band - Play with us">
+<cf_front title="HD street band - Play with us">
 <div id="pageBody">
 <div id="calendarContent">
 <cfoutput>
@@ -76,4 +76,4 @@
     </div>
 </div>
 </div>
-</cfmodule>
+</cf_front>

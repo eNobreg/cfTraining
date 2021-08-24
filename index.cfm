@@ -1,4 +1,4 @@
-<cfmodule template="customTags/front.cfm">
+<cf_front>
   <div id="pageBody">
     <div id="homeContent">
   <h1> HD Street band to play out of state</h1>
@@ -31,4 +31,4 @@
       </div>
     </div>
   </div>
-</cfmodule>
+</cf_front>

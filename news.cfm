@@ -3,7 +3,7 @@
 <!---Get news years--->
 <cfset rsNewsYears = newsService.getNewsYears() />
 
-<cfmodule template="customTags/front.cfm" title="HD street band - News">
+<cf_front title="HD street band - News">
   <div id="pageBody">
       <div id="calendarContent">
         <cfif isDefined("url.newsID")>
@@ -54,4 +54,4 @@
             <p class="alignRight">&nbsp;</p>
       </div>
     </div>
-</cfmodule>
+</cf_front>

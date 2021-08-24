@@ -22,7 +22,7 @@
 <!---Get instruments to feed the form's Drop-Down list--->
 <cfset rsInstrumentsList = userService.getInstruments() />
 
-<cfmodule template="customTags/front.cfm" title="HD street band - Profile">
+<cf_front title="HD street band - Profile">
 	<div id="pageBody">
 		<h1>Update your profile</h1>
 		<cfform id="frm_editUser">
@@ -81,4 +81,4 @@
 			</fieldset>
 		</cfform>
 	</div>
-</cfmodule>
+</cf_front>

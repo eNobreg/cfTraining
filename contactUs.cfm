@@ -2,7 +2,7 @@
 <cfset pageService = createObject("component", 'components.pageService') />
 <cfset rsPage = pageService.getPageContent(6) />
 
-<cfmodule template="customTags/front.cfm" title="HD street band - Contact Us">
+<cf_front title="HD street band - Contact Us">
   <div id="pageBody">
   <!---Erase from here--->
     <cfoutput>
@@ -11,4 +11,4 @@
     </cfoutput>
 <!---To here--->
 </div>
-</cfmodule>
+</cf_front>
